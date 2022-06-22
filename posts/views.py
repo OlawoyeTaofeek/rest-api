@@ -4,7 +4,7 @@ from rest_framework import generics, permissions, mixins, status
 from .models import Post, Vote
 from .serializers import PostSerializer, VoteSerializer
 from rest_framework.exceptions import ValidationError
-from rest_framework import Response
+from rest_framework.response import Response
 # Create your views here.
 
 class PostList(generics.ListCreateAPIView):
@@ -32,7 +32,7 @@ class VoteCreate(generics.CreateAPIView, mixins.DestroyModelMixin):
 
     def delete(self, request, *args, **kwargs):
         if self.get_queryset().exists():
-            self.get_queryset.delete()
+            self.get_queryset().delete()
             return Response(status=status.Http_204_NO_CONTENT)
         else:
             raise ValidationError('You never voted for this post...silly :)')
