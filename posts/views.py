@@ -33,6 +33,6 @@ class VoteCreate(generics.CreateAPIView, mixins.DestroyModelMixin):
     def delete(self, request, *args, **kwargs):
         if self.get_queryset().exists():
             self.get_queryset().delete()
-            return Response(status=status.Http_204_NO_CONTENT)
+            return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             raise ValidationError('You never voted for this post...silly :)')
