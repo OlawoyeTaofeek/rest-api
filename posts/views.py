@@ -22,6 +22,14 @@ class PostRetrieveDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer = PostSerializer(queryset, many=True)
     permission_class = [permissions.IsAuthenticatedOrReadOnly]
 
+    def delete(self, request, *args, **kwargs):
+        post = Post.objects.filter(pk = self.kwargs['pk'], poster_name=self.request.user)
+        if post.exists():
+            return self.destroy(request, *arga, **kwargs)
+        else:
+            raise ValidationError('This isn\'t your post so you cant delete it')
+
+
 
 
 class VoteCreate(generics.CreateAPIView, mixins.DestroyModelMixin):

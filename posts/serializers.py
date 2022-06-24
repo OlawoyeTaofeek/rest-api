@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from .models import Post, Vote
 
-
+#Serializers in Django REST Framework are responsible for converting objects into data types understandable by javascript and front-end frameworks.
 class PostSerializer(serializers.ModelSerializer):
     poster_name = serializers.ReadOnlyField(source= 'poster_name.username')
     poster_id = serializers.ReadOnlyField(source= 'poster_name.id')
